@@ -21,10 +21,12 @@ Xd_test = np.delete(Xd_test, -1, axis=1)
 
 mb_size = 200           # mini-batch size
 ne = int(800/mb_size)   # número de épocas
-W = np.ones((401, 1))
+W = np.ones((401, 1))/5
+novoW = np.ones((401, 1))/5
 coluna1 = np.ones((mb_size,1))
 #print(coluna1)
 
+eta = 1
 
 for i in range(ne):
     xt_incomplete = Xd[((i*mb_size)):(i+1)*mb_size, :] # 200x400
@@ -34,15 +36,18 @@ for i in range(ne):
     #print("X: \n", x)
     d_mb = d[i*mb_size, 0]
     
-    v = np.matmul(xt, W)
-    #print(v)
-    y = (np.exp(v)-np.exp(-v))/(np.exp(v)+np.exp(-v))
-    #print(y)
-    e = np.subtract(d_mb, y)
-    exp2v = np.exp(2*v)
-    exp2v_1 = (exp2v+1)**2
-    d_phi = exp2v/exp2v_1
-    #print(d_phi)
-    delta = np.dot(np.matrix.flatten(d_phi), np.matrix.flatten(e))
-    print(delta)
-
+    for j in range(mb_size):
+        W = novoW
+        x1 = x[:, j]
+        v = np.matmul(np.transpose(x1), W)
+        #print(v)
+        y = (np.exp(v)-np.exp(-v))/(np.exp(v)+np.exp(-v))
+        #print(y)
+        e = np.subtract(d_mb, y)
+        exp2v = np.exp(2*v)
+        exp2v_1 = (exp2v+1)**2
+        d_phi = exp2v/exp2v_1
+        #print(d_phi)
+        delta = np.dot(np.matrix.flatten(d_phi), np.matrix.flatten(e))
+        Delta = delta*xt
+        novoW = W + eta*Delta
