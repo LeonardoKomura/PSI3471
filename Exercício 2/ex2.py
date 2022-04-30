@@ -42,7 +42,7 @@ for i in range(ne):
     exp2v = np.exp(2*v)
     exp2v_1 = (exp2v+1)**2
     d_phi = exp2v/exp2v_1
-    print(d_phi)
-    #delta = np.dot(d_phi, e)
-    #print(delta)
+    #print(d_phi)
+    delta = np.dot(np.matrix.flatten(d_phi), np.matrix.flatten(e))
+    print(delta)
 
