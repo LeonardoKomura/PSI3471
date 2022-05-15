@@ -1,23 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 
-
-# In[15]:
-
-
-Nb = 100            # mini-batch size
+Nb = 200            # mini-batch size
 Ne = 1000           # número de épocas
 eta = 0.05
-
-
-# In[16]:
-
 
 #Função a) (9900)
 data_a_csv = pd.read_csv("dados_a_train.csv")
@@ -40,10 +26,6 @@ x_a_test = np.delete(test_a, -1, axis=1)
 coluna_ta = np.ones((999,1))
 x_a_test = np.append(coluna_ta, x_a_test, axis = 1)
 
-
-# In[17]:
-
-
 #Função b) (9000)
 data_b_csv = pd.read_csv("dados_b_train.csv")
 data_b_csv.head()
@@ -65,10 +47,6 @@ x_b_test = np.delete(test_b, -1, axis=1)
 coluna_t = np.ones((1799,1))
 x_b_test = np.append(coluna_t, x_b_test, axis = 1)
 
-
-# In[18]:
-
-
 #Função c) (9000)
 data_c_csv = pd.read_csv("dados_c_train.csv")
 data_c_csv.head()
@@ -87,10 +65,6 @@ test_c.shape
 y_c = test_c[:, -1]
 x_c_test = np.delete(test_c, -1, axis=1)
 x_c_test = np.append(coluna_t, x_c_test, axis = 1)
-
-
-# In[19]:
-
 
 #Função d) (9000)
 data_d_csv = pd.read_csv("dados_d_train.csv")
@@ -111,25 +85,16 @@ y_d = test_d[:, -1]
 x_d_test = np.delete(test_d, -1, axis=1)
 x_d_test = np.append(coluna_t, x_d_test, axis = 1)
 
-
-# In[20]:
-
-
 def phi(x):
-    y = (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))
+    y = 1/(1 + np.exp(x))
     return y
 def phi_l(x):
-    y = 1 - (np.exp(x)-np.exp(-x))/(np.exp(x)+np.exp(-x))**2
+    y = -(np.exp(x)/((1+np.exp(x))**2))
     return y
 
-
-# In[ ]:
-
-
-# a)
 def neural(x_train, Ne, Nb, eta, n, x_test, d_test):
-    w = np.zeros((1,n+1))
-    w1 = np.zeros((n,2))
+    w = np.random.randn(1,n+1)
+    w1 = np.random.randn(n,2)
     size = len(x_train)
     size_test = len(x_test)
     
@@ -185,13 +150,8 @@ def neural(x_train, Ne, Nb, eta, n, x_test, d_test):
         v_test = np.matmul(w, xout_test)
         y_test = phi(v)
         erro = erro + ((d_test[i]-y_test)**2)
-    print("n = ", n, " : Erro quadrático: ", erro/size_test)
+    print("n = ", n, " : Erro quadrático: ", erro[0,0]/size_test)
 
-
-# In[ ]:
-
-
-#3, 4, 5, 10, 15, 20, 50, 100
 print("a) f(x) = 1/x")
 erro_a = neural(x_a, Ne, Nb, eta, 3, x_a_test, y_a)
 erro_a = neural(x_a, Ne, Nb, eta, 5, x_a_test, y_a)
@@ -210,7 +170,7 @@ erro_b = neural(x_b, Ne, Nb, eta, 20, x_b_test, y_b)
 erro_b = neural(x_b, Ne, Nb, eta, 50, x_b_test, y_b)
 erro_b = neural(x_b, Ne, Nb, eta, 100, x_b_test, y_b)
 
-print("a) f(x) = exp(-x)")
+print("c) f(x) = exp(-x)")
 erro_c = neural(x_c, Ne, Nb, eta, 3, x_c_test, y_c)
 erro_c = neural(x_c, Ne, Nb, eta, 5, x_c_test, y_c)
 erro_c = neural(x_c, Ne, Nb, eta, 10, x_c_test, y_c)
@@ -219,7 +179,7 @@ erro_c = neural(x_c, Ne, Nb, eta, 20, x_c_test, y_c)
 erro_c = neural(x_c, Ne, Nb, eta, 50, x_c_test, y_c)
 erro_c = neural(x_c, Ne, Nb, eta, 100, x_c_test, y_c)
 
-print("a) f(x) = sen(x)")
+print("d) f(x) = sen(x)")
 erro_d = neural(x_d, Ne, Nb, eta, 3, x_d_test, y_d)
 erro_d = neural(x_d, Ne, Nb, eta, 5, x_d_test, y_d)
 erro_d = neural(x_d, Ne, Nb, eta, 10, x_d_test, y_d)
@@ -227,10 +187,3 @@ erro_d = neural(x_d, Ne, Nb, eta, 15, x_d_test, y_d)
 erro_d = neural(x_d, Ne, Nb, eta, 20, x_d_test, y_d)
 erro_d = neural(x_d, Ne, Nb, eta, 50, x_d_test, y_d)
 erro_d = neural(x_d, Ne, Nb, eta, 100, x_d_test, y_d)
-
-
-# In[ ]:
-
-
-
-
