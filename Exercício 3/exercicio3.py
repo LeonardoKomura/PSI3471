@@ -123,7 +123,7 @@ def phi_l(x):
     return y
 
 
-# In[57]:
+# In[ ]:
 
 
 # a)
@@ -185,37 +185,48 @@ def neural(x_train, Ne, Nb, eta, n, x_test, d_test):
         v_test = np.matmul(w, xout_test)
         y_test = phi(v)
         erro = erro + ((d_test[i]-y_test)**2)
-    print("Erro quadrático: ", erro/size_test)
+    print("n = ", n, " : Erro quadrático: ", erro/size_test)
 
 
-# In[58]:
+# In[ ]:
 
 
 #3, 4, 5, 10, 15, 20, 50, 100
 print("a) f(x) = 1/x")
-print("n = 3")
 erro_a = neural(x_a, Ne, Nb, eta, 3, x_a_test, y_a)
-print("n = 5")
 erro_a = neural(x_a, Ne, Nb, eta, 5, x_a_test, y_a)
-print("n = 10")
 erro_a = neural(x_a, Ne, Nb, eta, 10, x_a_test, y_a)
-print("n = 15")
 erro_a = neural(x_a, Ne, Nb, eta, 15, x_a_test, y_a)
-print("n = 20")
 erro_a = neural(x_a, Ne, Nb, eta, 20, x_a_test, y_a)
-print("n = 50")
 erro_a = neural(x_a, Ne, Nb, eta, 50, x_a_test, y_a)
-print("n = 100")
 erro_a = neural(x_a, Ne, Nb, eta, 100, x_a_test, y_a)
 
-print("a) f(x) = log10(x)")
-erro_b = neural(x_b, Ne, Nb, eta, n, x_b_test, y_b)
+print("b) f(x) = log10(x)")
+erro_b = neural(x_b, Ne, Nb, eta, 3, x_b_test, y_b)
+erro_b = neural(x_b, Ne, Nb, eta, 5, x_b_test, y_b)
+erro_b = neural(x_b, Ne, Nb, eta, 10, x_b_test, y_b)
+erro_b = neural(x_b, Ne, Nb, eta, 15, x_b_test, y_b)
+erro_b = neural(x_b, Ne, Nb, eta, 20, x_b_test, y_b)
+erro_b = neural(x_b, Ne, Nb, eta, 50, x_b_test, y_b)
+erro_b = neural(x_b, Ne, Nb, eta, 100, x_b_test, y_b)
 
 print("a) f(x) = exp(-x)")
-erro_c = neural(x_c, Ne, Nb, eta, n, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 3, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 5, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 10, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 15, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 20, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 50, x_c_test, y_c)
+erro_c = neural(x_c, Ne, Nb, eta, 100, x_c_test, y_c)
 
 print("a) f(x) = sen(x)")
-erro_d = neural(x_d, Ne, Nb, eta, n, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 3, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 5, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 10, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 15, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 20, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 50, x_d_test, y_d)
+erro_d = neural(x_d, Ne, Nb, eta, 100, x_d_test, y_d)
 
 
 # In[ ]:
