@@ -1,5 +1,8 @@
 import math
 import numpy as np
 import ctypes
-tabela = ctypes.c_uint8(512)
-print(tabela)
+
+a = 1.0
+b = 1.000000000000000000000000000
+print(a)
+print(b)
